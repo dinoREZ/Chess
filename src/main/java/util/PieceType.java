@@ -14,13 +14,13 @@ public enum PieceType {
     Bishop("bishop.png"),
     Queen("queen.png"),
     King("king.png");
-    public final Map<Boolean, BufferedImage> imageMap;
+    public final Map<GameColor, BufferedImage> imageMap;
 
     private PieceType(String imagePath) {
         imageMap = new HashMap<>();
         try {
-            imageMap.put(true, ImageIO.read(new File("src/main/images/white/" + imagePath)));
-            imageMap.put(false, ImageIO.read(new File("src/main/images/black/" + imagePath)));
+            imageMap.put(GameColor.White, ImageIO.read(new File("src/main/images/white/" + imagePath)));
+            imageMap.put(GameColor.Black, ImageIO.read(new File("src/main/images/black/" + imagePath)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,21 +1,41 @@
 package logic;
 
+import logic.pieces.PieceInterface;
+
 import java.util.Optional;
 
 public class Field {
     int x;
     int y;
-    private Piece piece;
+    private PieceInterface piece;
 
-    public void setPiece(Piece piece) {
+    public Field(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setPiece(PieceInterface piece) {
         this.piece = piece;
     }
 
-    public Optional<Piece> getPiece() {
+    public Optional<PieceInterface> getPiece() {
         return Optional.ofNullable(piece);
     }
 
     public void removePiece() {
         piece = null;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public String toString() {
+        return "Field{"+ x + "-"+ y + ", " + (piece == null? "Empty" : piece) + '}';
     }
 }
