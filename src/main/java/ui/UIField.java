@@ -17,11 +17,13 @@ public class UIField extends JPanel implements MouseListener {
     Field field;
     GameColor color;
     Move move;
+    boolean selected;
 
     public UIField(Field field) {
         this.field = field;
         this.color = (field.getX() + field.getY()) % 2 == 0? GameColor.White : GameColor.Black;
         this.move = null;
+        this.selected = false;
         this.setBackground(color.color);
         this.addMouseListener(this);
     }
@@ -41,25 +43,36 @@ public class UIField extends JPanel implements MouseListener {
     }
 
     public void setMoveable(Move move) {
+        selected = false;
         this.move = move;
         this.setBackground(color.selectedColor);
     }
 
+    public void setUnMoveable() {
+        selected = false;
+        this.move = null;
+        this.setBackground(color.color);
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(move != null) {
-            if(getParent() instanceof UIBoard uiBoard) {
+        if(getParent() instanceof UIBoard uiBoard) {
+            if(selected) {
+                selected = false;
+                this.setBackground(color.color);
+                uiBoard.resetPossibleMoves();
+            }
+            else if(move != null) {
                 uiBoard.doMove(move);
             }
-        }
-        else {
-            this.field.getPiece().ifPresent(piece -> {
-                Move[] possibleMoves = piece.getPossibleMoves();
-                if(getParent() instanceof UIBoard uiBoard) {
-                    this.setBackground(color.selectedColor);
+            else {
+                this.field.getPiece().ifPresent(piece -> {
+                    Move[] possibleMoves = piece.getPossibleMoves();
                     uiBoard.displayPossibleMoves(possibleMoves);
-                }
-            });
+                    this.setBackground(color.selectedColor);
+                    this.selected = true;
+                });
+            }
         }
     }
 

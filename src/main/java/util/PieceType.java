@@ -16,7 +16,7 @@ public enum PieceType {
     King("king.png");
     public final Map<GameColor, BufferedImage> imageMap;
 
-    private PieceType(String imagePath) {
+    PieceType(String imagePath) {
         imageMap = new HashMap<>();
         try {
             imageMap.put(GameColor.White, ImageIO.read(new File("src/main/images/white/" + imagePath)));

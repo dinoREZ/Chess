@@ -21,14 +21,31 @@ public class UIBoard extends JPanel {
             for (int x = 0; x < boardSize; x++) {
                 Component component = this.getComponent(x + y * boardSize);
                 Move move = moveableTo[x][boardSize - y - 1];
-                if(move != null && component instanceof UIField uiField) {
-                    uiField.setMoveable(move);
+                if(component instanceof UIField uiField) {
+                    if(move != null) {
+                        uiField.setMoveable(move);
+                    }
+                    else {
+                        uiField.setUnMoveable();
+                    }
+                }
+            }
+        }
+    }
+
+    public void resetPossibleMoves() {
+        for(int y = 0; y < boardSize; y++) {
+            for (int x = 0; x < boardSize; x++) {
+                Component component = this.getComponent(x + y * boardSize);
+                if(component instanceof UIField uiField) {
+                    uiField.setUnMoveable();
                 }
             }
         }
     }
 
     public void doMove(Move move) {
+        // TODO
         System.out.println(move);
     }
 }
