@@ -18,4 +18,8 @@ public abstract class Piece implements PieceInterface {
     public GameColor getColor() {
         return pieceColor;
     }
+
+    public void setField(Field field) {
+        this.field = field;
+    }
 }

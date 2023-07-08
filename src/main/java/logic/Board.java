@@ -47,4 +47,14 @@ public class Board {
     public Field getField(int x, int y) {
         return fields[x][y];
     }
+
+    public boolean doMove(Move move) {
+        Piece piece = move.getFrom().getPiece().orElseThrow();
+        // TODO validate move?
+        move.to.setPiece(piece);
+        piece.setField(move.to);
+        move.from.removePiece();
+
+        return true;
+    }
 }

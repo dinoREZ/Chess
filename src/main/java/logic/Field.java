@@ -1,24 +1,24 @@
 package logic;
 
-import logic.pieces.PieceInterface;
+import logic.pieces.Piece;
 
 import java.util.Optional;
 
 public class Field {
     int x;
     int y;
-    private PieceInterface piece;
+    private Piece piece;
 
     public Field(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public void setPiece(PieceInterface piece) {
+    public void setPiece(Piece piece) {
         this.piece = piece;
     }
 
-    public Optional<PieceInterface> getPiece() {
+    public Optional<Piece> getPiece() {
         return Optional.ofNullable(piece);
     }
 

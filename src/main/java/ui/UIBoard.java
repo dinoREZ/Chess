@@ -1,5 +1,6 @@
 package ui;
 
+import logic.Board;
 import logic.Field;
 import logic.Move;
 
@@ -10,6 +11,12 @@ import java.awt.*;
 import static util.Constants.boardSize;
 
 public class UIBoard extends JPanel {
+
+    UI ui;
+
+    public UIBoard(UI ui) {
+        this.ui = ui;
+    }
 
     public void displayPossibleMoves(Move[] moves) {
         Move[][] moveableTo = new Move[boardSize][boardSize];
@@ -45,7 +52,8 @@ public class UIBoard extends JPanel {
     }
 
     public void doMove(Move move) {
-        // TODO
         System.out.println(move);
+        ui.doMove(move);
+        resetPossibleMoves();
     }
 }

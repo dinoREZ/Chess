@@ -1,6 +1,7 @@
 package ui;
 
 import logic.Board;
+import logic.Move;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +12,12 @@ public class UI {
 
     JFrame frame;
     UIBoard uiBoard;
+    Board board;
 
     public UI(Board board) {
+        this.board = board;
         frame = new JFrame();
-        uiBoard = new UIBoard();
+        uiBoard = new UIBoard(this);
 
         uiBoard.setLayout(new GridLayout(boardSize, boardSize));
 
@@ -44,5 +47,10 @@ public class UI {
         }
         frame.validate();
         frame.repaint();
+    }
+
+    public void doMove(Move move) {
+        board.doMove(move);
+        update();
     }
 }

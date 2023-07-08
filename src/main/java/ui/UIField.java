@@ -2,6 +2,7 @@ package ui;
 
 import logic.Field;
 import logic.Move;
+import logic.pieces.Piece;
 import logic.pieces.PieceInterface;
 import util.GameColor;
 
@@ -30,7 +31,7 @@ public class UIField extends JPanel implements MouseListener {
 
     public void update() {
         removePiece();
-        Optional<PieceInterface> pieceOpt = field.getPiece();
+        Optional<Piece> pieceOpt = field.getPiece();
         if(pieceOpt.isPresent()) {
             PieceInterface piece = pieceOpt.get();
             BufferedImage image = piece.getPieceType().imageMap.get(piece.getColor());
